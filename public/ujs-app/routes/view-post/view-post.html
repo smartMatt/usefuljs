@@ -1,0 +1,25 @@
+
+
+
+<div class="new-post-container">
+  <div class="post-title">{{post.title}}</div>
+  <div ng-repeat="field in post.fields | orderBy:'displayOrder'">
+    <div class="post-header" ng-if="field.type == 'header'">
+      {{field.value}}
+    </div>
+    <div class="post-text" ng-if="field.type == 'text'">
+      {{field.value}}
+    </div>
+    <div ng-if="field.type == 'code'" class="code">
+      <div hljs source="field.value">
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="resource-header">Resources</div>
+
+  </div>
+  <div class="post-resource" ng-repeat="r in post.resources">
+    <a href="{{r.href}}" target="_blank">{{r.displayValue}}</a>
+  </div>
+</div>

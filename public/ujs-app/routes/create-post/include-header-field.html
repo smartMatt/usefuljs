@@ -1,0 +1,16 @@
+<div class="field-type">
+  <div class="row">
+    <div class="col-md-3">
+      <span class="field-label">Header</span>
+    </div>
+    <div class="col-md-9">
+      <div class="pull-right field-controls">
+        <button class="btn btn-default"><span class="fa fa-times"></span></button>
+        <button class="btn btn-default" ng-disabled="$first" ng-click="orderUp(field)"><span class="fa fa-arrow-up"></span></button>
+        <button class="btn btn-default" ng-disabled="$last" ng-click="orderDown(field)"><span class="fa fa-arrow-down"></span></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<input type="text" name="header" class="header-input" ng-model="field.value" placeholder="Enter Header" />

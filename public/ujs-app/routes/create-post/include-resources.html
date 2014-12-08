@@ -1,0 +1,21 @@
+<div class="field-type">
+  <div class="row">
+    <div class="col-lg-12">
+      <span class="field-label">Resources</span>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div ng-repeat="r in post.resources track by $index">
+        <div class="remove-resource">
+          <span class="btn btn-sm btn-danger" ng-click="removeResource($index);"><span class="fa fa-times"></span></span>
+          <input type="text" name="resource" class="resource-input-href" ng-model="r.href" placeholder="Link URL" />
+          <input type="text" name="resource" class="resource-input-displayValue" ng-model="r.displayValue" placeholder="Display Value" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
