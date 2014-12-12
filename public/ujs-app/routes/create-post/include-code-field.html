@@ -11,11 +11,11 @@
     </div>
     <div class="col-md-6">
       <div class="pull-right field-controls">
-        <button class="btn btn-default"><span class="fa fa-times"></span></button>
+        <button class="btn btn-default" ng-click="removeField(field, $index)"><span class="fa fa-times"></span></button>
         <button class="btn btn-default" ng-disabled="$first" ng-click="orderUp(field)"><span class="fa fa-arrow-up"></span></button>
         <button class="btn btn-default" ng-disabled="$last" ng-click="orderDown(field)"><span class="fa fa-arrow-down"></span></button>
       </div>
     </div>
   </div>
 </div>
-<textarea class="code-input" name="postCode" ng-model="field.value" hljs></textarea>
+<textarea ui-codemirror ui-codemirror-opts="editorOptions" class="code-input" name="postCode" ng-model="field.value" ></textarea>

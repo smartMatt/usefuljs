@@ -10,8 +10,9 @@ module.exports = function (app, dirname) {
 
   // static file routes
 
-  app.get('/', function (req, res) {
-    res.sendFile(dirname + '/public/index.html');
+  app.get('/', auth.isStaticAuth, function (req, res) {
+    console.dir('wut')
+    res.sendFile(dirname + '/public/ujs-index.html');
   })
 
   app.get('/login', function (req, res) {
@@ -25,10 +26,10 @@ module.exports = function (app, dirname) {
     res.sendFile(dirname + '/public/login.html');
   });
 
-  app.post('/create-post', auth.isAuthenticated, function (req, res) {
+  app.post('/post', auth.isAuthenticated, function (req, res) {
 
     req.body.dateCreated = new Date();
-    req.body.userid = req.user._id;
+    req.body.userId = req.user._id;
     var myPost = new Post(req.body);
 
     myPost.save(function (err, post) {
@@ -37,6 +38,18 @@ module.exports = function (app, dirname) {
     });
 
 
+  })
+
+  app.post('/post/edit/:_id', function (req, res) {
+
+    console.dir(req.body);
+    var editPost = req.body;
+    delete editPost._id;
+
+    Post.update({_id: req.params._id}, editPost, function(err, result) {
+      console.dir(err);
+      res.json(result);
+    })
   })
 
   app.get('/posts/:_id', auth.isAuthenticated, function (req, res) {
@@ -63,6 +76,21 @@ module.exports = function (app, dirname) {
       tags = _.uniq(tags);
       res.json(tags);
     })
+  })
+
+  app.post('/comment/:postId', function (req, res) {
+
+    var myComment = {
+      username: req.user.username,
+      dateCreated: new Date(),
+      userId: req.user._id,
+      value: req.body.comment
+    };
+
+    Post.update({_id: req.params.postId}, {$push: {comments: myComment}}, function (err, result) {
+      res.json(result);
+    });
+
   })
 
 

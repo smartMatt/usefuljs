@@ -13,8 +13,10 @@ exports.isAuthenticated = function (req, res, next){
 
 exports.isStaticAuth = function (req, res, next){
   if(req.isAuthenticated()){
+    console.dir('if')
     next();
   }else{
+    console.dir('else')
     res.redirect('/login')
   }
 }

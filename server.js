@@ -2,7 +2,7 @@
 
 var express = require('express'),
     path = require('path'),
-    bodyParser = require('body-parser')
+    bodyParser = require('body-parser'),
     session = require('express-session');
 
 

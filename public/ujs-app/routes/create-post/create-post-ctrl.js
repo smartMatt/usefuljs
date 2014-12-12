@@ -1,19 +1,28 @@
-ujsApp.controller('CreatePostCtrl', function ($scope, $http) {
+ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
 
-  $scope.post = {
-    fields: [
-      {
-        type: 'header',
-        displayOrder: 0
-      },
-      {
-        type: 'text',
-        displayOrder: 1
-      }
-    ],
-    tags: [],
-    resources: [{}]
+  if($routeParams.postId) {
+    console.dir($routeParams.postId);
+    $http.get('/posts/' + $routeParams.postId).success(function (data) {
+      $scope.post = data;
+    })
+  } else {
+    $scope.post = {
+      fields: [
+        {
+          type: 'header',
+          displayOrder: 0
+        },
+        {
+          type: 'text',
+          displayOrder: 1
+        }
+      ],
+      tags: [],
+      resources: [{}]
+    }
   }
+
+
 
   $http.get('/post-tags').success(function (data) {
     $scope.tagOptions = data;
@@ -26,19 +35,21 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http) {
     $scope.post.fields.push({type: type, displayOrder: max});
   }
 
-  $scope.savePost = function (post) {
+  $scope.removeField = function (field, index) {
+    var displayOrder = field.displayOrder;
 
-    console.dir(post);
-    $http.post('/create-post', post).success(function (data) {
-      console.dir(data);
-    })
+    $scope.post.fields.splice(index, 1);
+
+
+    for (var i = 0; i < $scope.post.fields.length; i ++) {
+      if ($scope.post.fields[i].displayOrder > displayOrder) {
+        $scope.post.fields[i].displayOrder--;
+      }
+    }
   }
 
   $scope.orderUp = function (field) {
     var displayOrder = field.displayOrder;
-
-    console.dir(displayOrder)
-    console.dir($scope.post.fields)
 
     for (var i = 0; i < $scope.post.fields.length; i ++) {
       if ($scope.post.fields[i].displayOrder == displayOrder) {
@@ -62,6 +73,18 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http) {
     }
   }
 
+  $scope.savePost = function (post) {
+
+    var url = '/post';
+
+    if ($routeParams.postId) {
+      url += '/edit/' + $routeParams.postId;
+    }
+
+    $http.post(url, post).success(function (data) {
+      console.dir(data);
+    })
+  }
 
   $scope.checkTag = function (tag) {
 
@@ -106,5 +129,12 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http) {
   $scope.removeResource = function (index) {
     $scope.post.resources.splice(index, 1);
   }
+
+
+  $scope.editorOptions = {
+    lineWrapping : true,
+    lineNumbers: true,
+    mode: 'javascript'
+  };
 
 })

@@ -1,8 +1,8 @@
- var ujsApp = angular.module('ujsApp', ['ngRoute', 'ui.bootstrap', 'hljs']);
+ var ujsApp = angular.module('ujsApp', ['ngRoute', 'ui.bootstrap', 'hljs', 'ui.codemirror', 'ngClipboard']);
 
 
  ujsApp.config(['$routeProvider', function ($routeProvider) {
-   $routeProvider.when('/create-post', {
+   $routeProvider.when('/create-post/:postId?', {
      controller: 'CreatePostCtrl',
      templateUrl: '/ujs-app/routes/create-post/create-post.html'
    }).when('/', {
@@ -14,6 +14,11 @@
    })
 
 
+ }]);
+
+
+ ujsApp.config(['ngClipProvider', function(ngClipProvider) {
+   ngClipProvider.setPath("bower_components/zeroclipboard/dist/ZeroClipboard.swf");
  }]);
 
 //ujsApp.run(['$httpProvider', function ($httpProvider) {

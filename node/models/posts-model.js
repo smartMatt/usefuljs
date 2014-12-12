@@ -12,13 +12,21 @@ var resourceSchema = new Schema({
   displayValue: String
 })
 
+var commentSchema = new Schema({
+  username: String,
+  userId: Schema.Types.ObjectId,
+  dateCreated: Date,
+  value: String
+})
+
 var postSchema = new Schema({
   title: String,
   dateCreated: Date,
   userId: Schema.Types.ObjectId,
   tags: [String],
   fields: [fieldSchema],
-  resources: [resourceSchema]
+  resources: [resourceSchema],
+  comments: [commentSchema]
 })
 
 var Post = mongoose.model('Post', postSchema);
