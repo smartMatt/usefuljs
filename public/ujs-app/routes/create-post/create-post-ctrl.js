@@ -1,4 +1,4 @@
-ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
+ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $location) {
 
   if($routeParams.postId) {
     console.dir($routeParams.postId);
@@ -22,17 +22,25 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
     }
   }
 
-
+  $scope.selectedTags = [];
 
   $http.get('/post-tags').success(function (data) {
-    $scope.tagOptions = data;
+    $scope.tagOptions = [];
+    for (var i = 0; i < data.length; i++) {
+      $scope.tagOptions.push({active: false, value: data[i]});
+    }
   })
 
   $scope.addField = function (type) {
     var displayOrders = _.pluck($scope.post.fields, 'displayOrder');
     var max = Math.max.apply(null, displayOrders);
     max++;
-    $scope.post.fields.push({type: type, displayOrder: max});
+    if(type == 'code') {
+      $scope.post.fields.push({type: type, codeType: 'javascript', displayOrder: max});
+    } else {
+      $scope.post.fields.push({type: type, displayOrder: max});
+    }
+    console.dir($scope.post)
   }
 
   $scope.removeField = function (field, index) {
@@ -83,6 +91,7 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
 
     $http.post(url, post).success(function (data) {
       console.dir(data);
+      $location.url('/posts/' + data._id);
     })
   }
 
@@ -93,11 +102,12 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
       return;
     }
 
-    var tagResults = [tag];
+    var tagResults = [{active: false, value: tag}];
 
     for (var i = 0; i < $scope.tagOptions.length; i++ ) {
-      var index = $scope.tagOptions[i].indexOf(tag);
-      if(index != -1) {
+      $scope.tagOptions[i].active = false;
+      var index = $scope.tagOptions[i].value.indexOf(tag);
+      if(index == 0) {
         tagResults.push($scope.tagOptions[i]);
       }
     }
@@ -106,8 +116,6 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
 
     $scope.tagResults = tagResults;
   }
-
-  $scope.selectedTags = [];
 
   $scope.selectTag = function (tag) {
     var index = $scope.post.tags.indexOf(tag);
@@ -130,6 +138,50 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams) {
     $scope.post.resources.splice(index, 1);
   }
 
+  $scope.highlightTag = function (data, down) {
+
+    var active = _.findWhere(data, {active: true});
+
+    if(!active) {
+      data[0].active = true;
+    } else {
+      if(down) {
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].active == true) {
+            if(i == data.length -1) {
+              data[0].active = true;
+              data[data.length - 1].active = false;
+              $scope.tagInput = data[0].value;
+            } else {
+              data[i + 1].active = true;
+              data[i].active = false;
+              $scope.tagInput = data[i + 1].value;
+
+            }
+            break;
+          }
+        }
+
+      } else {
+
+        for (var i = 0; i < data.length; i++) {
+          if(data[i].active == true) {
+            if(i == 0) {
+              data[0].active = false;
+              data[data.length - 1].active = true;
+              $scope.tagInput = data[data.length - 1].value;
+            } else {
+              data[i - 1].active = true;
+              data[i].active = false;
+              $scope.tagInput = data[i - 1].value;
+
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
 
   $scope.editorOptions = {
     lineWrapping : true,

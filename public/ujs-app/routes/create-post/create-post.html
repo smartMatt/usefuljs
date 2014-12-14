@@ -6,9 +6,9 @@
       <input type="text" class="title-input" name="postTitle" placeholder="Enter Title" ng-model="post.title" />
     </div>
     <div>
-      <input type="text" class="tags-input" name="postTags" placeholder="Enter Tags" ng-model="tagInput" ng-change="checkTag(tagInput)" />
+      <input type="text" class="tags-input" name="postTags" placeholder="Enter Tags" ng-model="tagInput" ng-change="checkTag(tagInput)" ng-enter="selectTag(tagInput)" ng-down="highlightTag(tagResults, true)" ng-up="highlightTag(tagResults, false)" />
       <div class="tag-results-container" ng-show="tagResults">
-        <span class="tag-result" ng-click="selectTag(tag)" ng-repeat="tag in tagResults track by $index">{{tag}}</span>
+        <span class="tag-result" ng-class="{'bg-theme-blue': tag.active}" ng-click="selectTag(tag.value)" ng-repeat="tag in tagResults track by $index">{{tag.value}}</span>
       </div>
       <div class="selected-tag-container">
         <div class="row">

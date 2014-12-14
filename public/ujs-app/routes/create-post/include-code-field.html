@@ -4,10 +4,11 @@
       <span class="field-label">Code</span>
     </div>
     <div class="col-md-3">
-      <select class="form-control" name="fieldCodeType" ng-model="field.codeType">
-        <option value="javascript">Javascript</option>
-        <option value="css">Css</option>
-      </select>
+      <input name="fieldCodeType" ng-model="field.codeType"  ng-value="'javascript'" class="hidden" type="text"  />
+      <!--<select class="form-control" name="fieldCodeType" ng-model="field.codeType">-->
+        <!--<option value="javascript">Javascript</option>-->
+        <!--<option value="css">Css</option>-->
+      <!--</select>-->
     </div>
     <div class="col-md-6">
       <div class="pull-right field-controls">

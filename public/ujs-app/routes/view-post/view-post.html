@@ -11,10 +11,14 @@
       {{field.value}}
     </div>
     <div ng-if="field.type == 'code'" class="code">
-      <div ui-codemirror ui-codemirror-opts="editorOptions" ng-model="field.value"></div>
-      <div class="post-text">
-        <span class="edit-btn pull-right" clip-copy="field.value"><span class="fa fa-copy"></span>&nbsp;&nbsp;Copy</span>
+      <div class="view-code-container">
+        <div class="view-code-tools">
+          <span class="copy-btn" ng-click="field.expand = !field.expand"><span class="fa fa-expand"></span>&nbsp;&nbsp;Expand</span>
+          <span class="copy-btn" clip-copy="field.value"><span class="fa fa-copy"></span>&nbsp;&nbsp;Copy</span>
+        </div>
+        <div ui-codemirror ui-codemirror-opts="editorOptions" ng-class="{'code-mirror-large': field.expand}" ng-model="field.value"></div>
       </div>
+
     </div>
   </div>
 

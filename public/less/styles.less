@@ -11,6 +11,7 @@
 
 @theme-blue: rgb(89, 156, 245);
 @theme-green: rgb(84, 181, 84);
+@theme-grey: #B8B8B8;
 
 @font-size-header: 18px;
 @font-size-title: 30px;
@@ -89,7 +90,7 @@ body {
   float:left;
   width: 100%;
   padding: 8px;
-  color: blue;
+  color: @theme-blue;
 }
 
 .tag-result:hover {
@@ -166,3 +167,11 @@ footer {
   }
 }
 
+.bg-theme-blue {
+  background-color: @theme-blue;
+  color: white;
+}
+
+.theme-blue {
+  color: @theme-blue;
+}

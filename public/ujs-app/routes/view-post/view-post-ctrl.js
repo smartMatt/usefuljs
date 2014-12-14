@@ -16,11 +16,9 @@ ujsApp.controller('ViewPostCtrl', function ($scope, $http, $routeParams) {
   }
 
 
-  $scope.copyCode = function (code) {
-    console.dir(code);
-//    var Copied = code.createTextRange();
-    code.execCommand("Copy");
-  }
+//  $scope.copyCode = function (code) {
+//    code.execCommand("Copy");
+//  }
 
   $scope.editorOptions = {
     lineWrapping : true,

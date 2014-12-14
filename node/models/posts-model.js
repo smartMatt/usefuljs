@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 var fieldSchema = new Schema({
   type: String,
   value: String,
-  codeType: String
+  codeType: String,
+  displayOrder: Number
 })
 
 var resourceSchema = new Schema({
