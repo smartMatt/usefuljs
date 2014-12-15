@@ -29,6 +29,7 @@ module.exports = function (app, dirname) {
   app.post('/post', auth.isAuthenticated, function (req, res) {
 
     req.body.dateCreated = new Date();
+    req.body.lastUpdated = new Date();
     req.body.userId = req.user._id;
     var myPost = new Post(req.body);
 
@@ -42,13 +43,12 @@ module.exports = function (app, dirname) {
 
   app.post('/post/edit/:_id', function (req, res) {
 
-    console.dir(req.body);
     var editPost = req.body;
+    editPost.lastUpdated = new Date ();
     delete editPost._id;
 
     Post.update({_id: req.params._id}, editPost, function(err, result) {
-      console.dir(err);
-      res.json(result);
+      res.json({_id: req.params._id});
     })
   })
 
@@ -88,7 +88,7 @@ module.exports = function (app, dirname) {
     };
 
     Post.update({_id: req.params.postId}, {$push: {comments: myComment}}, function (err, result) {
-      res.json(result);
+      res.json(myComment);
     });
 
   })

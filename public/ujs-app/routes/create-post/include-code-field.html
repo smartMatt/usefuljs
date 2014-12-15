@@ -19,4 +19,11 @@
     </div>
   </div>
 </div>
-<textarea ui-codemirror ui-codemirror-opts="editorOptions" class="code-input" name="postCode" ng-model="field.value" ></textarea>
+<div class="view-code-container" ng-class="{'code-mirror-large': field.expand}">
+  <div class="view-code-tools">
+    <span class="copy-btn" ng-click="field.expand = !field.expand"><span class="fa fa-expand"></span>&nbsp;&nbsp;Expand</span>
+    <span class="copy-btn" clip-copy="field.value"><span class="fa fa-copy"></span>&nbsp;&nbsp;Copy</span>
+  </div>
+  <textarea ui-codemirror ui-codemirror-opts="editorOptions" name="postCode"ng-model="field.value" ></textarea>
+
+</div>

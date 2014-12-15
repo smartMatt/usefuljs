@@ -22,13 +22,13 @@
     </div>
   </div>
 
-  <div class="resource-header" ng-show="post.resources.length > 0">Resources</div>
+  <div class="resource-header" ng-show="post.resources[0].href">Resources</div>
   <div class="post-resource" ng-repeat="r in post.resources" >
     <a href="{{r.href}}" target="_blank">{{r.displayValue}}</a>
   </div>
   <div class="post-header">Comments</div>
-  <div class="post-text">
-    <div ng-repeat="c in post.comments">
+  <div class="post-text" ng-if="post.comments.length != 0">
+    <div ng-repeat="c in post.comments" class="comment-container">
       <div class="comment-header">
         <span class="text-left">{{c.username}}</span>
         <span class="pull-right">{{c.dateCreated | date:'MM-dd-yyyy'}}</span>
@@ -42,6 +42,6 @@
     <textarea class="comment-input" ng-model="comment"></textarea>
   </div>
   <div class="post-text">
-    <button class="comment-btn" ng-click="postComment(comment)">Post</button>
+    <button class="edit-btn" ng-click="postComment(comment)">Post</button>
   </div>
 </div>

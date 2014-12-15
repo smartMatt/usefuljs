@@ -23,6 +23,7 @@ var commentSchema = new Schema({
 var postSchema = new Schema({
   title: String,
   dateCreated: Date,
+  lastUpdated: Date,
   userId: Schema.Types.ObjectId,
   tags: [String],
   fields: [fieldSchema],

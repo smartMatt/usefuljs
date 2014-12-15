@@ -11,8 +11,9 @@
    }).when('/posts/:_id', {
      controller: 'ViewPostCtrl',
      templateUrl: '/ujs-app/routes/view-post/view-post.html'
+   }).otherwise({
+     redirectTo: '/'
    })
-
 
  }]);
 
