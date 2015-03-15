@@ -8,6 +8,7 @@
 @main-med: #5A6494;
 @border-light: #E7E7E7;
 @border-med: #CCCCCC;
+@theme-light-blue: #D0D7FA;
 
 @theme-blue: rgb(89, 156, 245);
 @theme-green: rgb(84, 181, 84);
@@ -183,4 +184,25 @@ footer {
       height: 600px !important;
     }
   }
+}
+
+.store-tag-container {
+  width: 100%;
+  float:left;
+  background-color: @theme-light-blue;
+  .store-tag {
+    background-color: #599cf5;
+    color: white;
+    margin: 0 5px 0 0;
+    padding: 10px;
+    float:left;
+  }
+}
+
+.active-tag {
+  background-color: red;
+}
+
+.active-character {
+  background-color: #ffff00;
 }
