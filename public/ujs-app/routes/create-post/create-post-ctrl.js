@@ -1,7 +1,6 @@
 ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $location) {
 
   if($routeParams.postId) {
-    console.dir($routeParams.postId);
     $http.get('/posts/' + $routeParams.postId).success(function (data) {
       $scope.post = data;
     })
@@ -9,12 +8,9 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $loca
     $scope.post = {
       fields: [
         {
-          type: 'header',
+          type: 'code',
+          codeType: 'javascript',
           displayOrder: 0
-        },
-        {
-          type: 'text',
-          displayOrder: 1
         }
       ],
       tags: [],
@@ -40,7 +36,6 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $loca
     } else {
       $scope.post.fields.push({type: type, displayOrder: max});
     }
-    console.dir($scope.post)
   }
 
   $scope.removeField = function (field, index) {
@@ -90,7 +85,6 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $loca
     }
 
     $http.post(url, post).success(function (data) {
-      console.dir(data);
       $location.url('/posts/' + data._id);
     })
   }
