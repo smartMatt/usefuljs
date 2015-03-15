@@ -36,8 +36,8 @@
       <file leaf-file-name="styles.less" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/less/styles.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.40319717" vertical-offset="2941" max-vertical-offset="3504">
-              <caret line="198" column="14" selection-start-line="198" selection-start-column="14" selection-end-line="198" selection-end-column="14" />
+            <state vertical-scroll-proportion="0.5452931" vertical-offset="2941" max-vertical-offset="3520">
+              <caret line="203" column="22" selection-start-line="203" selection-start-column="22" selection-end-line="203" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -826,8 +826,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/less/styles.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40319717" vertical-offset="2941" max-vertical-offset="3504">
-          <caret line="198" column="14" selection-start-line="198" selection-start-column="14" selection-end-line="198" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.5452931" vertical-offset="2941" max-vertical-offset="3520">
+          <caret line="203" column="22" selection-start-line="203" selection-start-column="22" selection-end-line="203" selection-end-column="22" />
           <folding />
         </state>
       </provider>
