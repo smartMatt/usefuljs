@@ -3,7 +3,8 @@ var Post = require('./db').Post,
     _ = require('underscore'),
     userMod = require('./modules/user-mod'),
     passport = require('passport'),
-    auth = require('./passport/auth');
+    auth = require('./passport/auth'),
+    config = require('./config');
 
 
 module.exports = function (app, dirname) {
@@ -11,19 +12,18 @@ module.exports = function (app, dirname) {
   // static file routes
 
   app.get('/', auth.isStaticAuth, function (req, res) {
-    console.dir('wut')
-    res.sendFile(dirname + '/public/ujs-index.html');
+    res.render('ujs-index', {appTitle: config.appTitle, stylesheet: config.stylesheet, codeMirrorType: config.codeMirrorType});
   })
 
   app.get('/login', function (req, res) {
-    res.sendFile(dirname + '/public/login.html');
+    res.render('login', {appTitle: config.appTitle, stylesheet: config.stylesheet, codeMirrorType: config.codeMirrorType});
   })
 
   app.post('/login', passport.authenticate('local'), userMod.loginSuccess);
 
   app.get('/logout', function (req, res) {
     req.logout();
-    res.sendFile(dirname + '/public/login.html');
+    res.render('login', {appTitle: config.appTitle, stylesheet: config.stylesheet, codeMirrorType: config.codeMirrorType});
   });
 
   app.post('/post', auth.isAuthenticated, function (req, res) {
@@ -52,14 +52,18 @@ module.exports = function (app, dirname) {
     })
   })
 
-  app.get('/posts/:_id', auth.isAuthenticated, function (req, res) {
+  app.get('/posts/:_id', function (req, res) {
     Post.findById(req.params._id, function (err, result) {
       res.json(result);
     })
   })
 
-  app.get('/posts', auth.isAuthenticated, function (req, res) {
-    Post.find({}).exec(function (err, posts) {
+  app.get('/posts', function (req, res) {
+    var query = {};
+    if(!req.user) {
+      query = {'isPublic': true}
+    }
+    Post.find(query).exec(function (err, posts) {
       res.json(posts);
     })
   })
@@ -95,4 +99,10 @@ module.exports = function (app, dirname) {
 
 
   app.post('/user', userMod.createUser)
+
+  app.get('/auth-status/:postId?', function (req, res) {
+    auth.authStatus(req.user, req.params.postId, function (err, statusMessage) {
+      res.json(statusMessage);
+    })
+  })
 }

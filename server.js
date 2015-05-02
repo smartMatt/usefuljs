@@ -3,17 +3,18 @@
 var express = require('express'),
     path = require('path'),
     bodyParser = require('body-parser'),
-    session = require('express-session');
-
-
-
+    session = require('express-session'),
+    ejs = require('ejs');
 
 var app = express();
 
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser());
-app.use(session({secret: 'keyboard cat'}))
+app.use(session({secret: 'keyboard cat'}));
 
 
 

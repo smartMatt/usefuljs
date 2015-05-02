@@ -1,0 +1,29 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="$dismiss()"><span>&times;</span></button>
+    <h3 class="modal-title">Wut</h3>
+  </div>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-lg-6">
+        <label for="Public">Public</label>
+        <span class="text-muted text-right"><i>Anyone can see this post</i></span>
+        <div class="input-group">
+          <input type="radio" name="privacy" value="public" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <label for="Privacy">Private</label>
+        <div class="input-group">
+          <input type="radio" name="privacy" value="private"  />
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-default" ng-click="$dismiss()">Close</button>
+    <button class="btn btn-success" ng-click="$dismiss()">Save</button>
+  </div>
+</div>

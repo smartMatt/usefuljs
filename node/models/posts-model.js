@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    config = require('../config');
 
 var fieldSchema = new Schema({
   type: String,
@@ -25,12 +26,13 @@ var postSchema = new Schema({
   dateCreated: Date,
   lastUpdated: Date,
   userId: Schema.Types.ObjectId,
+  isPublic: Boolean,
   tags: [String],
   fields: [fieldSchema],
   resources: [resourceSchema],
   comments: [commentSchema]
 })
 
-var Post = mongoose.model('Post', postSchema);
+var Post = mongoose.model(config.postCollection, postSchema);
 
 module.exports.Post = Post;

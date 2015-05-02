@@ -1,16 +1,10 @@
- var ujsApp = angular.module('ujsApp', ['ngRoute', 'ui.bootstrap', 'hljs', 'ui.codemirror', 'ngClipboard']);
+ var ujsApp = angular.module('ujsApp', ['ngRoute', 'ui.bootstrap', 'hljs', 'ui.codemirror', 'ngClipboard', 'commonApp']);
 
 
  ujsApp.config(['$routeProvider', function ($routeProvider) {
    $routeProvider.when('/create-post/:postId?', {
      controller: 'CreatePostCtrl',
      templateUrl: '/ujs-app/routes/create-post/create-post.html'
-   }).when('/', {
-     controller: 'DashboardCtrl',
-     templateUrl: '/ujs-app/routes/dashboard/dashboard.html'
-   }).when('/posts/:_id', {
-     controller: 'ViewPostCtrl',
-     templateUrl: '/ujs-app/routes/view-post/view-post.html'
    }).otherwise({
      redirectTo: '/'
    })

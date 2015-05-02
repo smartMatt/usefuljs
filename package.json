@@ -6,6 +6,7 @@
   "dependencies": {
     "bcrypt": "^0.8.0",
     "body-parser": "^1.10.0",
+    "ejs": "^2.3.1",
     "express": "^4.10.4",
     "express-session": "^1.9.3",
     "less": "^2.1.1",

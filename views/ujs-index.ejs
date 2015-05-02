@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+  <% if (codeMirrorType == "text/x-go") { %>
+  <script>
+    var codeMirrorType = "text/x-go";
+  </script>
+  <% } %>
+
+  <% if (codeMirrorType == "javascript") { %>
+  <script>
+    var codeMirrorType = "javascript";
+  </script>
+  <% } %>
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+  <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css"/>
+
+  <link rel="stylesheet/less" type="text/css" href="/less/<%= stylesheet %>.less">
+  <link rel="stylesheet" type="text/css" href="/bower_components/highlightjs/styles/github.css">
+  <link rel="stylesheet" type="text/css" href="/bower_components/codemirror/lib/codemirror.css">
+
+  <script src="/bower_components/angular/angular.js"></script>
+  <script src="/bower_components/angular-route/angular-route.js"></script>
+  <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="/bower_components/less/dist/less.js"></script>
+  <script src="/bower_components/underscore/underscore.js"></script>
+  <script src="/bower_components/codemirror/lib/codemirror.js"></script>
+  <script src="/bower_components/codemirror/mode/javascript/javascript.js"></script>
+  <script src="/bower_components/codemirror/mode/go/go.js"></script>
+  <script src="/bower_components/angular-ui-codemirror/ui-codemirror.js"></script>
+  <script src="/bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+  <script src="/bower_components/ng-clip/dest/ng-clip.min.js"></script>
+
+  <script src="/bower_components/highlightjs/highlight.pack.js"></script>
+  <script src="/bower_components/angular-highlightjs/angular-highlightjs.js"></script>
+
+  <script src="/ujs-app/ujs-app.js"></script>
+  <script src="/ujs-app/routes/create-post/create-post-ctrl.js"></script>
+
+
+  <script src="/common/common-app.js"></script>
+  <script src="/common/routes/dashboard/dashboard-ctrl.js"></script>
+  <script src="/common/routes/view-post/view-post-ctrl.js"></script>
+  <script src="/common/directives/post-list-directive.js"></script>
+  <script src="/common/directives/directives.js"></script>
+  <script src="/common/filters/filters.js"></script>
+  <script src="/common/filters/search-filter.js"></script>
+
+
+</head>
+<body ng-app="ujsApp">
+
+<div class="header-main">
+  <a href="#/"><h1 class="text-center"><%= appTitle %></h1></a>
+</div>
+<div class="header-nav">
+  <div class="container">
+    <a href="#/"><span class="nav-item">Home</span></a>
+    <a href="#/create-post"><span class="nav-item">Create Post</span></a>
+    <a href="/logout"><span class="nav-item logout">Logout</span></a>
+  </div>
+</div>
+
+<div class="container">
+  <ng-view></ng-view>
+</div>
+
+<footer>
+
+</footer>
+
+</body>
+</html>

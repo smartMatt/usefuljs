@@ -1,5 +1,7 @@
 
-var User = require('./../models/user-model').User;
+var User = require('./../models/user-model').User,
+    Post = require('./../db').Post;
+
 
 
 
@@ -46,5 +48,36 @@ exports.isAdmin = function (req, res, next) {
     next();
   }else{
     res.json({auth: false});
+  }
+}
+
+exports.authStatus = function (user, postId, next) {
+
+
+  var statusMessage = {};
+
+  if (user) {
+    statusMessage.loggedIn = true;
+
+    if(postId) {
+      Post.find({userId: user._id, _id: postId}).exec(function (err, posts) {
+        console.dir(posts);
+
+        if(posts.length != 0) {
+          statusMessage.userPost = true;
+        }
+
+        next(null, statusMessage);
+
+      })
+    } else {
+      next(null, statusMessage);
+
+    }
+
+  } else {
+    statusMessage.loggedIn = false;
+    next(null, statusMessage);
+
   }
 }

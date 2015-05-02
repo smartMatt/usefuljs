@@ -1,4 +1,4 @@
-ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $location) {
+ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $location, $modal) {
 
   if($routeParams.postId) {
     $http.get('/posts/' + $routeParams.postId).success(function (data) {
@@ -177,10 +177,19 @@ ujsApp.controller('CreatePostCtrl', function ($scope, $http, $routeParams, $loca
     }
   }
 
+  $scope.changeVisibility = function () {
+    $modal.open({
+      templateUrl: '/ujs-app/routes/create-post/visibility-modal.html',
+      controller: function ($scope) {
+
+      }
+    })
+  }
+
   $scope.editorOptions = {
     lineWrapping : true,
     lineNumbers: true,
-    mode: 'javascript'
+    mode: codeMirrorType
   };
 
 })

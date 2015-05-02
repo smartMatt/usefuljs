@@ -36,10 +36,15 @@
     </div>
 
     <div class="post-actions-container">
+      <span class="post-action" ng-click="post.isPublic = !post.isPublic">
+        <span ng-show="post.isPublic"><span class="fa fa-unlock"></span> Public</span>
+        <span ng-show="!post.isPublic"><span class="fa fa-lock"></span> Private</span>
+      </span>
       <span class="post-action" ng-click="addField('header')"><span class="fa fa-plus"></span> Header</span>
       <span class="post-action" ng-click="addField('text')"><span class="fa fa-plus"></span> Text</span>
       <span class="post-action" ng-click="addField('code')"><span class="fa fa-plus"></span> Code</span>
       <span class="post-action" ng-click="addResource()"><span class="fa fa-plus"></span> Resource</span>
+
       <span class="post-action post-save" ng-click="savePost(post)">Save</span>
     </div>
 
