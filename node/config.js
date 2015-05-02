@@ -15,4 +15,4 @@ var config = {
   }
 }
 
-module.exports = config.javascript;
+module.exports = config.go;
